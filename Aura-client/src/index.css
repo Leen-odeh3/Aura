@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+
 :root{
   --Primary:#FF6F61;
   --secondary:#D3D3D3;
 
 }
-
 *{
   padding: 0%;
   margin: 0%;
@@ -13,4 +14,20 @@
 span{
   color:var(--Primary);
   font-weight:900;
+}
+.middle-header-search .input-search {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--secondary);
+  padding:12px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+}
+.link{
+  text-decoration: underline;
+  color:#c5c5c0;
+  font-size:12px !important;
+  padding-left: 10px;
+  margin-top: 10px !important;
 }
