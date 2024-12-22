@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "d75FkC+SwOt704AjJAqWwppvu6WrMW01DTzAJpGT5fY=",
+  "Source": "Aura.Api",
+  "BasePath": "_content/Aura.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
