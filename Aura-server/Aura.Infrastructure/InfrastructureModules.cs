@@ -1,7 +1,9 @@
-﻿namespace Aura.Infrastructure;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Aura.Infrastructure;
 public static class InfrastructureModules
 {
-    public static IserviceCollection addDependancy(this IServiceCollection service)
+    public static IServiceCollection addDependancy(this IServiceCollection service)
     {
         return service;
     }

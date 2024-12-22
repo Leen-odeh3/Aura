@@ -10,3 +10,4 @@ C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\Aura.Domain.dl
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\refint\Aura.Domain.dll
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\Aura.Domain.pdb
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\ref\Aura.Domain.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\Aura.Domain.csproj.AssemblyReference.cache
