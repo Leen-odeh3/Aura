@@ -1,0 +1,12 @@
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\bin\Debug\net8.0\Aura.Domain.deps.json
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\bin\Debug\net8.0\Aura.Domain.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\bin\Debug\net8.0\Aura.Domain.pdb
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\Aura.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\Aura.Domain.AssemblyInfoInputs.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\Aura.Domain.AssemblyInfo.cs
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\Aura.Domain.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\Aura.Domain.sourcelink.json
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\Aura.Domain.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\refint\Aura.Domain.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\Aura.Domain.pdb
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Domain\obj\Debug\net8.0\ref\Aura.Domain.dll

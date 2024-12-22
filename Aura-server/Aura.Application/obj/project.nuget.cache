@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ep3dPK3uTcxXWocsow9QZwMcmr0HkE1MtPQcV9Lz+E3hpFPxTzMg05VthbPn9OvL5BM65+V1lhTrZ1Jwo1afog==",
+  "dgSpecHash": "N+WpA3CSOASpsEtc2F/BUG8JoxKPwfjanDaQwEvlxfZEKBrRT6M08Cbc/iEuPDrtvdh9bIuAqkrCBAzeSQEsGg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\hp\\Desktop\\C#\\Aura\\Aura.Application\\Aura.Application.csproj",
+  "projectFilePath": "C:\\Users\\hp\\Desktop\\Aura\\Aura-server\\Aura.Application\\Aura.Application.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

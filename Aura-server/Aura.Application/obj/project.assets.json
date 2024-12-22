@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "Aura.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Aura.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Aura.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Aura.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Aura.Domain/Aura.Domain.csproj",
+      "msbuildProject": "../Aura.Domain/Aura.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "Aura.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\hp\\.nuget\\packages\\": {},
@@ -14,11 +33,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hp\\Desktop\\C#\\Aura\\Aura.Application\\Aura.Application.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\Desktop\\Aura\\Aura-server\\Aura.Application\\Aura.Application.csproj",
       "projectName": "Aura.Application",
-      "projectPath": "C:\\Users\\hp\\Desktop\\C#\\Aura\\Aura.Application\\Aura.Application.csproj",
+      "projectPath": "C:\\Users\\hp\\Desktop\\Aura\\Aura-server\\Aura.Application\\Aura.Application.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hp\\Desktop\\C#\\Aura\\Aura.Application\\obj\\",
+      "outputPath": "C:\\Users\\hp\\Desktop\\Aura\\Aura-server\\Aura.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -39,7 +58,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\hp\\Desktop\\Aura\\Aura-server\\Aura.Domain\\Aura.Domain.csproj": {
+              "projectPath": "C:\\Users\\hp\\Desktop\\Aura\\Aura-server\\Aura.Domain\\Aura.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

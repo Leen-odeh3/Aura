@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Aura.Application/1.0.0": {
+        "dependencies": {
+          "Aura.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Aura.Application.dll": {}
+        }
+      },
+      "Aura.Domain/1.0.0": {
+        "runtime": {
+          "Aura.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Aura.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Aura.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

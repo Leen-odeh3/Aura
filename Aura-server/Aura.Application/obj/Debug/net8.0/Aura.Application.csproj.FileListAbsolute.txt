@@ -1,0 +1,16 @@
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\bin\Debug\net8.0\Aura.Application.deps.json
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\bin\Debug\net8.0\Aura.Application.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\bin\Debug\net8.0\Aura.Application.pdb
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\bin\Debug\net8.0\Aura.Domain.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\bin\Debug\net8.0\Aura.Domain.pdb
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\Aura.Application.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\Aura.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\Aura.Application.AssemblyInfoInputs.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\Aura.Application.AssemblyInfo.cs
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\Aura.Application.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\Aura.Application.sourcelink.json
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\Aura.Application.csproj.CopyComplete
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\Aura.Application.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\refint\Aura.Application.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\Aura.Application.pdb
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Application\obj\Debug\net8.0\ref\Aura.Application.dll

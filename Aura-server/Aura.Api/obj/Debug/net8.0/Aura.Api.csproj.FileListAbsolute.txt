@@ -1,0 +1,7 @@
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\Aura.Api.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\Aura.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\Aura.Api.AssemblyInfoInputs.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\Aura.Api.AssemblyInfo.cs
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\Aura.Api.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\Aura.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\Aura.Api.sourcelink.json
