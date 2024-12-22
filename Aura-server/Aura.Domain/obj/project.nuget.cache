@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "QjzTU8xK8JiBnK9PyuuiyJgIffPIjE76eMS9kLUMn4cQDt8rBWpArvi/yeJftRgcXpPj6WsG1K77FbC/dlw43w==",
+  "dgSpecHash": "SBoTo7XUPybAmuYiMAgsvnFPaV47R3xTjVl+E02qBc5Dp4zDxac7qXlEJADjGHeMpqXviqK0QBq+HvRZJOopKg==",
   "success": true,
   "projectFilePath": "C:\\Users\\hp\\Desktop\\Aura\\Aura-server\\Aura.Domain\\Aura.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+  ],
   "logs": []
 }
