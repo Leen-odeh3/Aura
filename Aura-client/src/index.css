@@ -24,3 +24,10 @@ span{
   font-size: 16px;
   outline: none;
 }
+.link{
+  text-decoration: underline;
+  color:#c5c5c0;
+  font-size:12px !important;
+  padding-left: 10px;
+  margin-top: 10px !important;
+}

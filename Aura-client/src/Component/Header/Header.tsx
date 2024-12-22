@@ -6,12 +6,12 @@ const Header = () => {
     <Box>
       <Grid
         container
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "10px 20px" }}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
-        <Grid item xs={12} lg={2} sx={{ textAlign: "center" }}>
-          <img src={Logo} width="30%" height="30%" alt="Auro Logo" />
+        <Grid item xs={12} lg={1}>
+          <img src={Logo} width="50%" height="50%" alt="Auro Logo" />
         </Grid>
-        <Grid item lg={3} sx={{ textAlign: "center" }}>
+        <Grid item lg={3}>
           <div className="middle-header-search">
             <input
               type="search"
@@ -20,7 +20,7 @@ const Header = () => {
             />
           </div>
         </Grid>
-        <Grid item xs={12} lg={7} sx={{ textAlign: "center", paddingLeft: "10px" }}>
+        <Grid item xs={12} lg={7} sx={{ paddingLeft: "10px" }}>
           <Navbar />
         </Grid>
       </Grid>
