@@ -13,15 +13,16 @@ public class CommentService : ICommentService
         _commentRepository = commentRepository;
     }
 
-    public async Task<List<Comment>> GetCommentsByPostIdAsync(int postId)
+    public async Task<List<CommentResponseDto>> GetCommentsByPostIdAsync(int postId)
     {
         return await _commentRepository.GetCommentsByPostIdAsync(postId);
     }
 
-    public async Task<Comment> AddCommentAsync(int postId, PostComment comment)
+    public async Task<Comment> AddCommentAsync(int postId, PostComment comment, int userId)
     {
-        return await _commentRepository.AddCommentAsync(postId, comment);
+        return await _commentRepository.AddCommentAsync(postId, comment, userId);
     }
+
 
     public async Task<Comment> RemoveCommentAsync(int commentId)
     {

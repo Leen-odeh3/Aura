@@ -76,30 +76,19 @@ namespace Aura.Infrastructure.Migrations
                     b.ToTable("Favorites");
                 });
 
-            modelBuilder.Entity("Aura.Domain.Entities.Hashtag", b =>
+            modelBuilder.Entity("Aura.Domain.Entities.Follow", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("FollowerId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Count")
+                    b.Property<int>("FollowingId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
+                    b.HasKey("FollowerId", "FollowingId");
 
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("datetime2");
+                    b.HasIndex("FollowingId");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Hashtags");
+                    b.ToTable("Follows");
                 });
 
             modelBuilder.Entity("Aura.Domain.Entities.Image", b =>
@@ -330,6 +319,25 @@ namespace Aura.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Aura.Domain.Entities.Follow", b =>
+                {
+                    b.HasOne("Aura.Domain.Entities.User", "Follower")
+                        .WithMany("Following")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Aura.Domain.Entities.User", "Following")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowingId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Follower");
+
+                    b.Navigation("Following");
+                });
+
             modelBuilder.Entity("Aura.Domain.Entities.Like", b =>
                 {
                     b.HasOne("Aura.Domain.Entities.Post", "Post")
@@ -440,6 +448,10 @@ namespace Aura.Infrastructure.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Favorites");
+
+                    b.Navigation("Followers");
+
+                    b.Navigation("Following");
 
                     b.Navigation("Likes");
 

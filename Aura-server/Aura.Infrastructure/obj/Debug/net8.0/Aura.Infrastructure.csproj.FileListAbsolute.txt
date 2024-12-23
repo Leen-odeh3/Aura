@@ -1,4 +1,5 @@
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Infrastructure.deps.json
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Infrastructure.runtimeconfig.json
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Infrastructure.dll
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Infrastructure.pdb
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Application.dll
@@ -15,6 +16,5 @@ C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.I
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.dll
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\refint\Aura.Infrastructure.dll
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.pdb
-C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\ref\Aura.Infrastructure.dll
-C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Infrastructure.runtimeconfig.json
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.genruntimeconfig.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\ref\Aura.Infrastructure.dll

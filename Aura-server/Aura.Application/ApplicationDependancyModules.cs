@@ -20,6 +20,10 @@ public static class ApplicationDependancyModules
         services.AddScoped<IUserRetrievalService, UserRetrievalService>();
         services.AddScoped<IPostService,PostService>();
         services.AddScoped<ICommentService,CommentService>();
+        services.AddScoped<ILikeService,LikeService>();
+        services.AddScoped<IFavoriteService, FavoriteService>();
+        services.AddScoped<IFollowService, FollowService>();
+
 
         //FileServices
 

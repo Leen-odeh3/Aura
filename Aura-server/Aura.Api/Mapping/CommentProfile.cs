@@ -12,6 +12,9 @@ public class CommentProfile : Profile
             .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => DateTime.UtcNow))
             .ForMember(dest => dest.DateUpdated, opt => opt.MapFrom(src => DateTime.UtcNow));
 
+        CreateMap<Comment, CommentResponseDto>()
+              .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.User.Username));
+
         CreateMap<RemoveComment, Comment>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CommentId));
     }

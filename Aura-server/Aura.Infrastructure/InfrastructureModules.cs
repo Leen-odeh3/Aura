@@ -19,9 +19,14 @@ public static class InfrastructureModules
         service.AddScoped<IUnitOfWork, UnitOfWork>();
         service.AddScoped<IPostRepository, PostRepository>();
         service.AddScoped<ICommentRepository, CommentRepository>();
+        service.AddScoped<IFavoriteRepository, FavoriteRepository>();
+        service.AddScoped<ILikeRepository, LikeRepository>();
+        service.AddScoped<IFollowRepository, FollowRepository>();
+
 
         var connectionString = configuration.GetConnectionString("Default");
         service.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+
 
         service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
   .AddJwtBearer(options =>
