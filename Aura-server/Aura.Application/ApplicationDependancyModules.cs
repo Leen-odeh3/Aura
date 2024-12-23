@@ -2,6 +2,7 @@
 using Aura.Application.Abstracts.UserServices;
 using Aura.Application.Services.FileServices;
 using Aura.Application.Services.UserServices;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Aura.Application;
@@ -16,6 +17,9 @@ public static class ApplicationDependancyModules
         services.AddScoped<IUserRetrievalService, UserRetrievalService>();
 
         //FileServices
+
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
         services.AddScoped<ICloudinaryService, CloudinaryService>();
         services.AddScoped<IFileService, FileService>();
 

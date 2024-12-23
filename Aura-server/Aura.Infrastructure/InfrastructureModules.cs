@@ -18,7 +18,7 @@ public static class InfrastructureModules
         service.AddScoped<IUserRepository, UserRepository>();
         service.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var connectionString = configuration.GetConnectionString("Default");
         service.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
         service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -31,21 +31,6 @@ public static class InfrastructureModules
               .GetBytes(configuration.GetSection("AppSettings:TokenKey").Value)),
           ValidateIssuer = false,
           ValidateAudience = false
-      };
-      options.Events = new JwtBearerEvents
-      {
-          OnMessageReceived = context =>
-          {
-              var accessToken = context.Request.Query["access_token"];
-
-              var path = context.HttpContext.Request.Path;
-              if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/chat"))
-              {
-                  context.Token = accessToken;
-              }
-
-              return Task.CompletedTask;
-          }
       };
   });
 
