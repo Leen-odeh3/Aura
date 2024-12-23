@@ -10,6 +10,8 @@ public class User
     public Image Image { get; set; }
     public byte[] PasswordHash { get; set; } = new byte[32];
     public byte[] PasswordSalt { get; set; } = new byte[32];
+    public ICollection<Follow> Followers { get; set; } = new List<Follow>();
+    public ICollection<Follow> Following { get; set; } = new List<Follow>();
     public ICollection<PrivateMessage> SendedPrivateMessages { get; set; }
     public ICollection<PrivateMessage> ReceivedPrivateMessages { get; set; }
     public ICollection<Post> Posts { get; set; } = new List<Post>();

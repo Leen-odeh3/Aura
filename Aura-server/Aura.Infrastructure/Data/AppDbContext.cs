@@ -17,18 +17,20 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new FavoriteConfiguration());
         modelBuilder.ApplyConfiguration(new ReportConfiguration());
         modelBuilder.ApplyConfiguration(new PrivateMessageConfiguration());
+        modelBuilder.ApplyConfiguration(new FollowConfiguration());
+
 
         base.OnModelCreating(modelBuilder);
     }
 
     public DbSet<Post> Posts { get; set; }
+    public DbSet<Follow> Follows { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Like> Likes { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Favorite> Favorites { get; set; }
     public DbSet<Repost> Reposts { get; set; }
     public DbSet<Story> Stories { get; set; }
-    public DbSet<Hashtag> Hashtags { get; set; }
     public DbSet<PrivateMessage> PrivateMessages { get; set; }
     public DbSet<Image> Images { get; set; }
 }
