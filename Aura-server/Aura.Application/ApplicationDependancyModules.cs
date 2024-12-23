@@ -1,7 +1,10 @@
-﻿using Aura.Application.Abstracts.FileServices;
+﻿using Aura.Application.Abstracts;
+using Aura.Application.Abstracts.FileServices;
 using Aura.Application.Abstracts.UserServices;
+using Aura.Application.Services;
 using Aura.Application.Services.FileServices;
 using Aura.Application.Services.UserServices;
+using Aura.Domain.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +18,8 @@ public static class ApplicationDependancyModules
         services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
         services.AddScoped<IUserProfileImageService, UserProfileImageService>();
         services.AddScoped<IUserRetrievalService, UserRetrievalService>();
+        services.AddScoped<IPostService,PostService>();
+        services.AddScoped<ICommentService,CommentService>();
 
         //FileServices
 
