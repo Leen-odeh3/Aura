@@ -13,7 +13,14 @@ public class FileService : IFileService
 
     public async Task<string> StoreImageToLocalFolder(IFormFile file)
     {
+
         string uploadsFolder = Path.Combine(hostingEnvironment.ContentRootPath, "Uploads");
+
+        if (!Directory.Exists(uploadsFolder))
+        {
+            Directory.CreateDirectory(uploadsFolder);
+        }
+
         string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
         string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 

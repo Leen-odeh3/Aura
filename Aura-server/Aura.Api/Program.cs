@@ -1,8 +1,8 @@
 using Aura.Api.Middleware;
 using Aura.Application;
 using Aura.Infrastructure;
-namespace Aura.Api;
 
+namespace Aura.Api;
 public class Program
 {
     public static void Main(string[] args)
@@ -14,7 +14,18 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.addDependancy(builder.Configuration)
-            .addApplicationDependancy().AddPresentationDependencies(builder.Configuration);
+            .addApplicationDependancy()
+            .AddPresentationDependencies(builder.Configuration);
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", policy =>
+            {
+                policy.AllowAnyOrigin()
+                      .AllowAnyMethod()
+                      .AllowAnyHeader();
+            });
+        });
 
         var app = builder.Build();
 
@@ -24,26 +35,14 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        builder.Services.AddCors(c =>
-        {
-            c.AddDefaultPolicy(options =>
-            options.WithOrigins("http://localhost:3000")
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials());
-        });
-
-        app.UseCors();
+        app.UseCors("AllowAll");
 
         app.UseHttpsRedirection();
-
         app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
         app.UseAuthentication();
-
         app.UseAuthorization();
 
         app.MapControllers();
-
 
         app.Run();
     }
