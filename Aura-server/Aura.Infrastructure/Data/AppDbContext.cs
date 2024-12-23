@@ -1,7 +1,6 @@
 ﻿using Aura.Domain.Entities;
 using Aura.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace Aura.Infrastructure.Data;
 public class AppDbContext :DbContext
@@ -17,6 +16,7 @@ public class AppDbContext :DbContext
         modelBuilder.ApplyConfiguration(new CommentConfiguration());
         modelBuilder.ApplyConfiguration(new FavoriteConfiguration());
         modelBuilder.ApplyConfiguration(new ReportConfiguration());
+        modelBuilder.ApplyConfiguration(new PrivateMessageConfiguration());
 
         base.OnModelCreating(modelBuilder);
     }
@@ -29,4 +29,6 @@ public class AppDbContext :DbContext
     public DbSet<Repost> Reposts { get; set; }
     public DbSet<Story> Stories { get; set; }
     public DbSet<Hashtag> Hashtags { get; set; }
+    public DbSet<PrivateMessage> PrivateMessages { get; set; }
+    public DbSet<Image> Images { get; set; }
 }
