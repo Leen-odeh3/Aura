@@ -19,6 +19,7 @@ public static class InfrastructureModules
         service.AddScoped<IUnitOfWork, UnitOfWork>();
         service.AddScoped<IPostRepository, PostRepository>();
         service.AddScoped<ICommentRepository, CommentRepository>();
+        service.AddScoped<ILikeRepository, LikeRepository>();
 
         var connectionString = configuration.GetConnectionString("Default");
         service.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
