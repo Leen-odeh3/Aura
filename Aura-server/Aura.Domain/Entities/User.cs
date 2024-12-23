@@ -1,14 +1,15 @@
-﻿using System.Xml.Linq;
-
-namespace Aura.Domain.Entities;
+﻿namespace Aura.Domain.Entities;
 public class User
 {
     public int Id { get; set; }
-    public string FullName { get; set; }
-    public string? ProfilePictureUrl { get; set; }
-    public bool IsDeleted { get; set; }
-
-    // Navigation properties
+    public string Username { get; set; }
+    public string About { get; set; } = string.Empty;
+    public int? ImageId { get; set; }
+    public Image Image { get; set; }
+    public byte[] PasswordHash { get; set; } = new byte[32];
+    public byte[] PasswordSalt { get; set; } = new byte[32];
+    public ICollection<PrivateMessage> SendedPrivateMessages { get; set; }
+    public ICollection<PrivateMessage> ReceivedPrivateMessages { get; set; }
     public ICollection<Post> Posts { get; set; } = new List<Post>();
     public ICollection<Story> Stories { get; set; } = new List<Story>();
     public ICollection<Like> Likes { get; set; } = new List<Like>();

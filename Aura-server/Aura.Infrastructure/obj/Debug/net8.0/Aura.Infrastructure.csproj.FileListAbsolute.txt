@@ -1,9 +1,3 @@
-C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.csproj.AssemblyReference.cache
-C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.AssemblyInfoInputs.cache
-C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.AssemblyInfo.cs
-C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.csproj.CoreCompileInputs.cache
-C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.sourcelink.json
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Infrastructure.deps.json
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Infrastructure.dll
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Infrastructure.pdb
@@ -11,8 +5,16 @@ C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.A
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Domain.dll
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Application.pdb
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Domain.pdb
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.AssemblyInfo.cs
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.sourcelink.json
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.csproj.CopyComplete
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.dll
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\refint\Aura.Infrastructure.dll
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.pdb
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\ref\Aura.Infrastructure.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\bin\Debug\net8.0\Aura.Infrastructure.runtimeconfig.json
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Infrastructure\obj\Debug\net8.0\Aura.Infrastructure.genruntimeconfig.cache
