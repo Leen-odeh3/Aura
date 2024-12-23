@@ -1,5 +1,5 @@
 ﻿namespace Aura.Domain.DTOs.Post;
-public class PostRemoveVM
+public class PostRemove
 {
     public int PostId { get; set; }
 }
