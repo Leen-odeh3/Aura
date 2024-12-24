@@ -6,29 +6,29 @@ import Form from './Form';
 const Register = () => {
   return (
     <Box sx={{ flexGrow: 1, height: "100vh" }}>
-      <Grid container sx={{ height: "100vh"}}>
-        <Grid 
-          xs={0} 
-          lg={5} 
+      <Grid container sx={{ height: "100%" }}>
+        <Grid
+          xs={0}
+          lg={5}
           sx={{
-            display: "flex", 
-            justifyContent:"end", 
-            alignItems:"center"
+            display: "flex",
+            justifyContent: "end",
+            alignItems: "center"
           }}
         >
-          <img 
-            src={RegisterPage} 
+          <img
+            src={RegisterPage}
             style={{
               width: "90%",
               height: "90%",
-              objectFit: "contain"  
-            }} 
+              objectFit: "contain"
+            }}
             alt="RegisterPage"
           />
         </Grid>
 
         <Grid xs={12} lg={7}>
-        <Form/>
+          <Form />
         </Grid>
       </Grid>
     </Box>
