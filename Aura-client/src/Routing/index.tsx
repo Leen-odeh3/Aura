@@ -4,6 +4,7 @@ import Register from "../Pages/Auth/Register/Register"
 import ForgotPassword from "../Pages/Auth/ForgotPassword/ForgotPassword"
 import Home from '../Pages/Home/Home';
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import PrivateRoute from "../Pages/Dashboard/PrivateRoute";
 
 const index = () => {
   return (
@@ -13,7 +14,9 @@ const index = () => {
       <Route path="/login" element={<Login />} />       
        <Route path="/register" element={<Register />} />
       <Route path="/forgot-pass" element={<ForgotPassword />} />
-      <Route path="/home" element={<Dashboard/>} />
+      <Route element={<PrivateRoute/>}>
+          <Route path="/home" element={<Dashboard />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
