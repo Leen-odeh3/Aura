@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography, Avatar } from '@mui/material';
+import { Box, Button, TextField, Typography, Avatar, Snackbar } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 
@@ -12,6 +12,9 @@ const Profile = () => {
   const [newImage, setNewImage] = useState(null);
   const [newAbout, setNewAbout] = useState('');
   const [isEditingAbout, setIsEditingAbout] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
   const userId = localStorage.getItem('userId');
 
@@ -66,9 +69,14 @@ const Profile = () => {
         }));
 
         setNewImage(null);
-        alert('Image added successfully!');
+        setSnackbarMessage('Image added successfully!');
+        setSnackbarSeverity('success');
+        setSnackbarOpen(true);
       } catch (error) {
         console.error('Error adding profile image:', error);
+        setSnackbarMessage('Error adding image!');
+        setSnackbarSeverity('error');
+        setSnackbarOpen(true);
       }
     }
   };
@@ -86,9 +94,14 @@ const Profile = () => {
           ...prev,
           profileImage: 'https://via.placeholder.com/150'
         }));
-        alert('Image removed successfully!');
+        setSnackbarMessage('Image removed successfully!');
+        setSnackbarSeverity('success');
+        setSnackbarOpen(true);
       } catch (error) {
         console.error('Error deleting profile image:', error);
+        setSnackbarMessage('Error removing image!');
+        setSnackbarSeverity('error');
+        setSnackbarOpen(true);
       }
     }
   };
@@ -108,11 +121,20 @@ const Profile = () => {
         }));
 
         setIsEditingAbout(false);
-        alert('About section updated successfully!');
+        setSnackbarMessage('About section updated successfully!');
+        setSnackbarSeverity('success');
+        setSnackbarOpen(true);
       } catch (error) {
         console.error('Error updating about section:', error);
+        setSnackbarMessage('Error updating about section!');
+        setSnackbarSeverity('error');
+        setSnackbarOpen(true);
       }
     }
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
   };
 
   return (
@@ -197,6 +219,14 @@ const Profile = () => {
           Save Image
         </Button>
       </Box>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        message={snackbarMessage}
+        severity={snackbarSeverity}
+      />
     </Box>
   );
 };
