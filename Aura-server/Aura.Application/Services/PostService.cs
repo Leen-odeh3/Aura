@@ -40,7 +40,6 @@ public class PostService : IPostService
             UserId = authenticatedUserId
         };
 
-        // Handle image upload if available
         if (postCreateDto.Image != null)
         {
             var imageLocalPath = await _fileService.StoreImageToLocalFolder(postCreateDto.Image);
@@ -63,11 +62,6 @@ public class PostService : IPostService
     public async Task<List<PostResponseDto>> GetAllPostsAsync(int loggedInUserId)
     {
         return await _postRepository.GetAllPostsAsync(loggedInUserId);
-    }
-
-    public async Task<Post> GetPostByIdAsync(int postId)
-    {
-        return await _postRepository.GetPostByIdAsync(postId);
     }
 
     public async Task<List<Post>> GetAllFavoritedPostsAsync(int loggedInUserId)
