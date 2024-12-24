@@ -1,6 +1,8 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from '../../api/axios';
+import { useNavigate } from 'react-router-dom';
+import Buttons from '../Buttons/Buttons';
 
 const ProfileCard = () => {
   const [userData, setUserData] = useState({
@@ -8,6 +10,8 @@ const ProfileCard = () => {
     about: '',
     profileImage: ''
   });
+
+const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -40,7 +44,7 @@ const ProfileCard = () => {
   return (
     <Box
       sx={{
-        height: '42%',
+        height: '60%',
         width: '60%',
         textAlign: 'center',
         borderRadius: '25px',
@@ -54,8 +58,8 @@ const ProfileCard = () => {
     >
       <img
         src={userData.profileImage}
-        width="40%"
-        height="55%"
+        width="50%"
+        height="43%"
         style={{
           borderRadius: '50%',
         }}
@@ -67,6 +71,9 @@ const ProfileCard = () => {
       <Typography sx={{ marginTop: '10px' }}>
         {userData.about}
       </Typography>
+    
+<button style={{padding:"10px 30px",marginTop:"10px",cursor:"pointer",
+  border:"1px solid gray",borderRadius:"30px"}} onClick={() => navigate('/profile')}>My profile</button>
     </Box>
   );
 };
