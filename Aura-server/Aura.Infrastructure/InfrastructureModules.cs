@@ -1,4 +1,6 @@
-﻿using Aura.Domain.Contracts;
+﻿using Aura.Application.Abstracts;
+using Aura.Application.Services;
+using Aura.Domain.Contracts;
 using Aura.Infrastructure.Data;
 using Aura.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -22,6 +24,7 @@ public static class InfrastructureModules
         service.AddScoped<IFavoriteRepository, FavoriteRepository>();
         service.AddScoped<ILikeRepository, LikeRepository>();
         service.AddScoped<IFollowRepository, FollowRepository>();
+        service.AddScoped<IStoryRepository, StoryRepository>();
 
 
         var connectionString = configuration.GetConnectionString("Default");
