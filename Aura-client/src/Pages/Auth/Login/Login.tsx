@@ -35,6 +35,7 @@ const Login = () => {
 
       console.log('Login successful:', response.data);
       localStorage.setItem('token', response.data.token); 
+      localStorage.setItem('userId', response.data.userId);
       navigate('/home'); 
     } catch (error) {
       console.error('Login failed:', error);
@@ -124,7 +125,6 @@ const Login = () => {
       </Typography>
     </Box>
 
-    {/* Decorative elements */}
     <Box
       sx={{
         position: 'absolute',
