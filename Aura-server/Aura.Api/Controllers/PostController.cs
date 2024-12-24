@@ -26,22 +26,11 @@ public class PostController : ControllerBase
         return Ok(posts);
     }
 
-    [HttpGet("{postId}")]
-    public async Task<ActionResult<PostResponseDto>> GetPostById(int postId)
-    {
-        var post = await _postService.GetPostByIdAsync(postId);
-        if (post == null)
-        {
-            return NotFound();
-        }
-        return Ok(post);
-    }
-
     [HttpPost]
     public async Task<ActionResult<Post>> CreatePost(CreatePost post)
     {
         var newPost = await _postService.CreatePostAsync(post);
-        return CreatedAtAction(nameof(GetPostById), new { postId = newPost.Id }, newPost);
+        return Ok(newPost);
     }
 
     [HttpDelete("{postId}")]

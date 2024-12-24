@@ -10,8 +10,8 @@ public class PostProfile : Profile
     public PostProfile()
     {
         CreateMap<Post, PostResponseDto>()
-            .ForMember(dest => dest.Image, opt => opt.Ignore())
-            .ForMember(dest => dest.User, opt => opt.MapFrom(src => new UserResponseDto
+        .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.Image))
+        .ForMember(dest => dest.User, opt => opt.MapFrom(src => new UserResponseDto
             {
                 Id = src.User.Id,
                 Username = src.User.Username,
@@ -22,6 +22,14 @@ public class PostProfile : Profile
                     ImagePath = src.User.Image.ImagePath
                 }
             }));
+
+        CreateMap<Post, PostResponseDto>()
+    .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.Image == null ? null : new ImageResponseDto
+    {
+        Id = src.Image.Id,
+        ImagePath = src.Image.ImagePath
+    }));
+
 
         CreateMap<CreatePost, Post>()
             .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => DateTime.UtcNow))

@@ -5,6 +5,7 @@ import ForgotPassword from "../Pages/Auth/ForgotPassword/ForgotPassword"
 import Home from '../Pages/Home/Home';
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import PrivateRoute from "../Pages/Dashboard/PrivateRoute";
+import Profile from "../Pages/Profile/Profile";
 
 const index = () => {
   return (
@@ -16,6 +17,8 @@ const index = () => {
       <Route path="/forgot-pass" element={<ForgotPassword />} />
       <Route element={<PrivateRoute/>}>
           <Route path="/home" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile/>} />
+
         </Route>
       </Routes>
     </BrowserRouter>

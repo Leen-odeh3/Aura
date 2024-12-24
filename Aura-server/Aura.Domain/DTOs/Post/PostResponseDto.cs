@@ -6,7 +6,7 @@ public class PostResponseDto
     public int Id { get; set; }
     public string Content { get; set; }
     public bool IsPrivate { get; set; }
-    public DateTime DateCreated { get; set; }
+    public DateTime DateCreated { get; set; } = DateTime.Now;
     public DateTime DateUpdated { get; set; }
     public ImageResponseDto Image { get; set; } 
     public UserResponseDto User { get; set; } 

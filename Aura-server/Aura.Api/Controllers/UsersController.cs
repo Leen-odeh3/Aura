@@ -47,12 +47,13 @@ namespace Aura.Api.Controllers
             return NoContent();
         }
 
-        [Authorize]
         [HttpPut("{userId}/about")]
-        public async Task<IActionResult> ChangeUserAbout([FromRoute] int userId, [FromQuery] string newAbout)
+        [Authorize]
+        public async Task<IActionResult> ChangeUserAbout([FromRoute] int userId, [FromBody] UpdateAboutRequest request)
         {
-            await userAccountService.ChangeUserAboutAsync(userId, newAbout);
-            return NoContent();
+            await userAccountService.ChangeUserAboutAsync(userId, request.NewAbout);
+            return Ok();
         }
+
     }
 }

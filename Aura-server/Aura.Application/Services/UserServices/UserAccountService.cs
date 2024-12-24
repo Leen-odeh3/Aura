@@ -45,19 +45,26 @@ public class UserAccountService : IUserAccountService
         return mapper.Map<UserResponseDto>(user);
     }
 
-    public async Task<string> LoginUserAsync(UserRequestDto userRequestDto)
+    public async Task<object> LoginUserAsync(UserRequestDto userRequestDto)
     {
         var user = await userRepository.GetUserByUsername(userRequestDto.Username.ToLower());
+
         if (user == null)
         {
             throw new NotFoundException(UserExceptionMessages.NotFoundUserByUsername);
         }
+
         if (!PasswordHashing.VerifyPassword(userRequestDto.Password, user.PasswordHash, user.PasswordSalt))
         {
             throw new BadRequestException(UserExceptionMessages.IncorrectPassword);
         }
+
         var token = TokenGenerator.Generate(user);
-        return token;
+        return new
+        {
+            Token = token,
+            UserId = user.Id
+        };
     }
 
     public async Task<UserResponseDto> GetUserByJwtTokenAsync()
@@ -96,12 +103,16 @@ public class UserAccountService : IUserAccountService
         {
             throw new UnauthorizedException();
         }
+
         var user = await userRepository.GetUserById(userId);
-        if (user == null)
+        if (user is null)
         {
             throw new NotFoundException(UserExceptionMessages.NotFoundUserById);
         }
-        user.About = newAbout;
+
+        user.About = newAbout;  
+
         await unitOfWork.SaveChangesAsync();
     }
+
 }
