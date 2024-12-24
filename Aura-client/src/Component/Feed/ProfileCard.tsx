@@ -58,8 +58,8 @@ const navigate = useNavigate();
     >
       <img
         src={userData.profileImage}
-        width="50%"
-        height="43%"
+        width="56%"
+        height="50%"
         style={{
           borderRadius: '50%',
         }}

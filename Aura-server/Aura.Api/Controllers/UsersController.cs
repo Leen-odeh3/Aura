@@ -49,9 +49,9 @@ namespace Aura.Api.Controllers
 
         [HttpPut("{userId}/about")]
         [Authorize]
-        public async Task<IActionResult> ChangeUserAbout([FromRoute] int userId, [FromBody] string newAbout)
+        public async Task<IActionResult> ChangeUserAbout([FromRoute] int userId, [FromBody] UpdateAboutRequest request)
         {
-            await userAccountService.ChangeUserAboutAsync(userId, newAbout);
+            await userAccountService.ChangeUserAboutAsync(userId, request.NewAbout);
             return Ok();
         }
 

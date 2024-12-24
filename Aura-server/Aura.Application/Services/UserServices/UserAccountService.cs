@@ -103,12 +103,16 @@ public class UserAccountService : IUserAccountService
         {
             throw new UnauthorizedException();
         }
+
         var user = await userRepository.GetUserById(userId);
-        if (user == null)
+        if (user is null)
         {
             throw new NotFoundException(UserExceptionMessages.NotFoundUserById);
         }
-        user.About = newAbout;
+
+        user.About = newAbout;  
+
         await unitOfWork.SaveChangesAsync();
     }
+
 }
