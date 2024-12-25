@@ -1,4 +1,4 @@
-import { Box,Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ const ProfileCard = () => {
     profileImage: ''
   });
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -43,9 +43,8 @@ const navigate = useNavigate();
   return (
     <Box
       sx={{
-        height: '60%',
-        width: '85%',
-        textAlig: 'center',
+        marginTop: "22px",
+        textAlign: 'center',
         borderRadius: '25px',
         backgroundColor: '#f0f0f0',
         display: 'flex',
@@ -53,12 +52,15 @@ const navigate = useNavigate();
         justifyContent: 'center',
         alignItems: 'center',
         padding: '20px',
+        width: "270px",  
+        height: "300px", 
+        boxSizing: 'border-box',
       }}
     >
       <img
         src={userData.profileImage}
-        width="56%"
-        height="50%"
+        width="55%" 
+        height="50%" 
         style={{
           borderRadius: '50%',
         }}
@@ -71,8 +73,18 @@ const navigate = useNavigate();
         {userData.about}
       </Typography>
     
-<button style={{padding:"10px 30px",marginTop:"10px",cursor:"pointer",
-  border:"1px solid gray",borderRadius:"30px"}} onClick={() => navigate('/profile')}>My profile</button>
+      <button
+        style={{
+          padding: "10px 30px",
+          marginTop: "10px",
+          cursor: "pointer",
+          border: "1px solid gray",
+          borderRadius: "30px"
+        }}
+        onClick={() => navigate('/profile')}
+      >
+        My profile
+      </button>
     </Box>
   );
 };

@@ -64,6 +64,7 @@ const Post = () => {
         borderRadius: "15px",
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
         backgroundColor: "#fff",
+        marginBottom:"20px"
       }}
     >
       {/* Header */}
