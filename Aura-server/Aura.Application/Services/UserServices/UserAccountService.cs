@@ -26,7 +26,13 @@ public class UserAccountService : IUserAccountService
         this.authenticatedUserService = authenticatedUserService;
     }
 
+    public async Task<List<UserResponseDto>> GetFollowersAsync(int userId)
+    {
+        var followers = await userRepository.GetFollowersAsync(userId);
 
+        var followersDto = followers.Select(f => mapper.Map<UserResponseDto>(f)).ToList();
+        return followersDto;
+    }
     public async Task<UserResponseDto> RegisterUserAsync(UserRequestDto userRequestDto)
     {
         if (userRepository.CheckIfUsernameExists(userRequestDto.Username))

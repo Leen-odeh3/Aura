@@ -12,6 +12,15 @@ public class UserRepository : IUserRepository
         this.context = context;
     }
 
+    public async Task<List<User>> GetFollowersAsync(int userId)
+    {
+        var followers = await context.Follows
+            .Where(f => f.FollowingId == userId)
+            .Select(f => f.Follower)
+            .ToListAsync();
+
+        return followers;
+    }
     public async Task AddAsync(User user)
     {
         await context.Users.AddAsync(user);

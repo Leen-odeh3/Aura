@@ -9,72 +9,28 @@ namespace Aura.Infrastructure.Repositories;
 
 public class FollowRepository : IFollowRepository
 {
-    private readonly AppDbContext _dbContext;
-    private readonly IMapper _mapper;
-    public FollowRepository(AppDbContext dbContext,IMapper mapper)
+    private readonly AppDbContext _context;
+
+    public FollowRepository(AppDbContext context)
     {
-        _dbContext = dbContext;
-        _mapper = mapper;
+        _context = context;
     }
 
-    public async Task<Follow> AddFollowAsync(int followerId, int followingId)
+    public async Task FollowUserAsync(int followerId, int followedId)
     {
-        if (followerId == followingId)
-        {
-            throw new InvalidOperationException("You cannot follow yourself.");
-        }
-
-        var existingFollow = await _dbContext.Follows
-            .FirstOrDefaultAsync(f => f.FollowerId == followerId && f.FollowingId == followingId);
-
-        if (existingFollow != null)
-        {
-            throw new InvalidOperationException("You are already following this user.");
-        }
-
         var follow = new Follow
         {
             FollowerId = followerId,
-            FollowingId = followingId
+            FollowingId = followedId,
         };
 
-        _dbContext.Follows.Add(follow);
-        await _dbContext.SaveChangesAsync();
-
-        return follow;
+        await _context.Follows.AddAsync(follow);
+        await _context.SaveChangesAsync();
     }
 
-    public async Task<Follow> RemoveFollowAsync(int followerId, int followingId)
+    public async Task<bool> IsFollowingAsync(int followerId, int followedId)
     {
-        var follow = await _dbContext.Follows
-            .FirstOrDefaultAsync(f => f.FollowerId == followerId && f.FollowingId == followingId);
-
-        if (follow != null)
-        {
-            _dbContext.Follows.Remove(follow);
-            await _dbContext.SaveChangesAsync();
-        }
-
-        return follow;
-    }
-
-    public async Task<List<UserResponseDto>> GetFollowersAsync(int userId)
-    {
-        var followers = await _dbContext.Follows
-            .Where(f => f.FollowingId == userId)
-            .Select(f => f.Follower)
-            .ToListAsync();
-
-        return _mapper.Map<List<UserResponseDto>>(followers);
-    }
-
-    public async Task<List<UserResponseDto>> GetFollowingAsync(int userId)
-    {
-        var following = await _dbContext.Follows
-            .Where(f => f.FollowerId == userId)
-            .Select(f => f.Following)
-            .ToListAsync();
-
-        return _mapper.Map<List<UserResponseDto>>(following);
+        return await _context.Follows
+            .AnyAsync(f => f.FollowerId == followerId && f.FollowingId == followedId);
     }
 }

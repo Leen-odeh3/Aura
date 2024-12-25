@@ -11,4 +11,6 @@ public interface IUserRepository
         int pageSize,
         string searchText = null);
     Task<User?> GetUserByUsername(string username);
+    public Task<List<User>> GetFollowersAsync(int userId);
+
 }
