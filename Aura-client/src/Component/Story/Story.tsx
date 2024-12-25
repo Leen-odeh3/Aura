@@ -10,8 +10,7 @@ const Story = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [uploading, setUploading] = useState<boolean>(false);
   const [selectedStory, setSelectedStory] = useState<StoryData | null>(null);
-  const [showFileInput, setShowFileInput] = useState<boolean>(false); // لتحديد ما إذا كانت نافذة رفع الصورة ستظهر
-
+  const [showFileInput, setShowFileInput] = useState<boolean>(false); 
   useEffect(() => {
     const fetchStories = async () => {
       try {
@@ -56,7 +55,7 @@ const Story = () => {
           },
         });
         setStories((prevStories) => [...prevStories, response.data]);
-        setShowFileInput(false); // إخفاء نافذة رفع الصورة بعد رفع الصورة بنجاح
+        setShowFileInput(false); 
       }
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -75,7 +74,7 @@ const Story = () => {
 
   return (
     <Box sx={{ width: '100%', display: "flex", justifyContent: "start", alignItems: "center" }}>
-      {/* أيقونة إضافة صورة عند الضغط عليها يتم إظهار نافذة رفع الصورة */}
+      
       <IconButton onClick={() => setShowFileInput(true)} color="primary" sx={{ fontSize: 40 }}>
         <AddCircle />
       </IconButton>
@@ -123,7 +122,7 @@ const Story = () => {
             sx={{ display: 'block' }}
             inputProps={{ accept: 'image/*' }}
           />
-          <button onClick={handleImageUpload}>Upload Image</button> {/* زر لتحميل الصورة */}
+          <button onClick={handleImageUpload}>Upload Image</button>
         </Box>
       )}
 
