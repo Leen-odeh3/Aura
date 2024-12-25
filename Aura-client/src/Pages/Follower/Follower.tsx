@@ -2,6 +2,7 @@ import { Box, Typography, List, ListItem, ListItemAvatar, Avatar, ListItemText }
 import { useState, useEffect } from 'react';
 import axios from '../../api/axios'; 
 import { useNavigate } from 'react-router-dom';
+import Header from '../../Component/Header/Header';
 
 const Follower = () => {
   const [followers, setFollowers] = useState<any[]>([]);
@@ -37,15 +38,19 @@ const Follower = () => {
   }, []); 
 
   return (
+    <>
+    <Header/>
     <Box sx={{ maxWidth: 800, margin: 'auto', paddingTop: 2 }}>
-      <Typography variant="h4" gutterBottom>
-        Followers List
+      <Typography variant="h5" gutterBottom sx={{marginTop:"20px"}}>
+        Followers
       </Typography>
       {error && <Typography color="error">{error}</Typography>} 
       <List>
         {followers.length > 0 ? (
           followers.map((follower) => (
-            <ListItem key={follower.id} onClick={() => navigate(`/profile/${follower.id}`)}>
+            <ListItem key={follower.id} 
+            sx={{borderRadius:4, padding: 2 , border:"1px solid #e3e1e1",
+              display: 'flex', width:"250px",flexDirection: 'column', alignItems: 'center',marginBottom:"20px"}}>
               <ListItemAvatar>
               <Avatar src={follower.image?.imagePath || '/default-avatar.jpg'} />
               </ListItemAvatar>
@@ -60,6 +65,7 @@ const Follower = () => {
         )}
       </List>
     </Box>
+    </>
   );
 };
 
