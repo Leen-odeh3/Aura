@@ -21,7 +21,7 @@ namespace Aura.Api.Controllers
         }
 
         [HttpGet("{userId}/followers")]
-      //  [Authorize]
+        [Authorize]
         public async Task<IActionResult> GetFollowers(int userId)
         {
             var followers = await userAccountService.GetFollowersAsync(userId);
