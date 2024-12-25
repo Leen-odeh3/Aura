@@ -2,6 +2,7 @@ import { Box, Grid } from "@mui/material";
 import ProfileCard from "./ProfileCard";
 import Post from "../Post/Post";
 import UserPosts from "../../Pages/Profile/UserPosts";
+import Story from "../Story/Story";
 
 const Feed = () => {
   return (
@@ -12,7 +13,8 @@ const Feed = () => {
         </Grid>
 
         <Grid xs={12} sm={9} sx={{marginLeft: "300px",
-           paddingTop: "20px",height: "85vh", overflowY: "scroll", width:"600px"}}>
+           paddingTop: "20px",height: "85vh", overflowY: "scroll", maxWidth:"600px"}}>
+            <Story/>
             <Post />
             <UserPosts />
         </Grid>
