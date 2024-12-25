@@ -27,6 +27,7 @@ public static class InfrastructureModules
         service.AddScoped<IStoryRepository, StoryRepository>();
 
 
+
         var connectionString = configuration.GetConnectionString("Default");
         service.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 

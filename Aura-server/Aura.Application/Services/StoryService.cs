@@ -1,42 +1,52 @@
 ﻿using Aura.Application.Abstracts;
 using Aura.Application.Abstracts.FileServices;
+using Aura.Application.Abstracts.UserServices;
 using Aura.Domain.Contracts;
 using Aura.Domain.DTOs.Story;
 using Aura.Domain.Entities;
+
 namespace Aura.Application.Services;
+
 public class StoryService : IStoryService
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IStoryRepository _storyRepository;
+    private readonly IAuthenticatedUserService _authenticatedUserService;
     private readonly ICloudinaryService _cloudinaryService;
     private readonly IFileService _fileService;
-    private readonly IStoryRepository _storyRepository;
 
     public StoryService(
-        IUnitOfWork unitOfWork,
+        IStoryRepository storyRepository,
+        IAuthenticatedUserService authenticatedUserService,
         ICloudinaryService cloudinaryService,
-        IFileService fileService,
-        IStoryRepository storyRepository)
+        IFileService fileService)
     {
-        _unitOfWork = unitOfWork;
+        _storyRepository = storyRepository;
+        _authenticatedUserService = authenticatedUserService;
         _cloudinaryService = cloudinaryService;
         _fileService = fileService;
-        _storyRepository = storyRepository;
     }
 
-    public async Task<Story> CreateStoryAsync(CreateStoryDto storyCreateDto)
+    public async Task<StoryResponseDto> CreateStoryAsync(CreateStoryDto createStoryDto)
     {
+        var userId = _authenticatedUserService.GetAuthenticatedUserId();
+
+        if (userId == 0)
+        {
+            throw new UnauthorizedAccessException("User not authenticated.");
+        }
+
         var story = new Story
         {
+            UserId = userId,
             DateCreated = DateTime.UtcNow,
-            IsDeleted = false
+            IsDeleted = false, 
         };
 
-        // Handle image upload if available
-        if (storyCreateDto.Image != null)
+        if (createStoryDto.Image != null)
         {
-            var imageLocalPath = await _fileService.StoreImageToLocalFolder(storyCreateDto.Image);
-            var uploadResults = await _cloudinaryService.UploadImageToCloudinary(imageLocalPath);
-            _fileService.DeleteFile(imageLocalPath);
+            var imagePath = await _fileService.StoreImageToLocalFolder(createStoryDto.Image);
+            var uploadResults = await _cloudinaryService.UploadImageToCloudinary(imagePath);
+            _fileService.DeleteFile(imagePath);
 
             story.Image = new Image
             {
@@ -45,36 +55,33 @@ public class StoryService : IStoryService
             };
         }
 
-        await _storyRepository.CreateStoryAsync(story);
-        await _unitOfWork.SaveChangesAsync();
+        var createdStory = await _storyRepository.CreateStoryAsync(story);
 
-        return story;
+        return new StoryResponseDto
+        {
+            Id = createdStory.Id,
+            ImagePath = createdStory.Image?.ImagePath,
+            DateCreated = createdStory.DateCreated,
+            IsDeleted = createdStory.IsDeleted
+        };
     }
 
-    public async Task<List<StoryResponseDto>> GetAllStoriesAsync(int userId)
+    public async Task DeleteExpiredStoriesAsync()
     {
-        var stories = await _storyRepository.GetAllStoriesAsync(userId);
-        return stories.Select(story => new StoryResponseDto
+        var expirationTime = DateTime.UtcNow.AddHours(-24); // 24 hours ago
+        await _storyRepository.DeleteExpiredStoriesAsync(expirationTime);
+    }
+
+    public async Task<List<StoryResponseDto>> GetStoriesAsync()
+    {
+        var stories = await _storyRepository.GetStoriesAsync();
+        return stories.Select(s => new StoryResponseDto
         {
-            Id = story.Id,
-            ImagePath = story.Image?.ImagePath,
-            DateCreated = story.DateCreated,
-            IsDeleted = story.IsDeleted
+            Id = s.Id,
+            ImagePath = s.Image?.ImagePath,
+            DateCreated = s.DateCreated,
+            IsDeleted = s.IsDeleted
         }).ToList();
     }
-
-    public async Task<Story> GetStoryByIdAsync(int storyId)
-    {
-        return await _storyRepository.GetStoryByIdAsync(storyId);
-    }
-
-    public async Task RemoveStoryAsync(int storyId)
-    {
-        await _storyRepository.RemoveStoryAsync(storyId);
-    }
-
-    public async Task RemoveExpiredStoriesAsync()
-    {
-        await _storyRepository.RemoveExpiredStoriesAsync();
-    }
 }
+

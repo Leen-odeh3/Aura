@@ -1,9 +1,7 @@
 ﻿using Aura.Application.Abstracts;
 using Aura.Application.Services;
 using Aura.Domain.DTOs.Story;
-using Aura.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aura.Api.Controllers;
@@ -20,34 +18,29 @@ public class StoryController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Story>> CreateStory([FromForm] CreateStoryDto createStoryDto)
+    public async Task<ActionResult<StoryResponseDto>> CreateStory(CreateStoryDto createStoryDto)
     {
-        var newStory = await _storyService.CreateStoryAsync(createStoryDto);
-        return CreatedAtAction(nameof(GetStoryById), new { storyId = newStory.Id }, newStory);
-    }
-
-    [HttpGet("{storyId}")]
-    public async Task<ActionResult<StoryResponseDto>> GetStoryById(int storyId)
-    {
-        var story = await _storyService.GetStoryByIdAsync(storyId);
-        if (story == null)
+        var story = await _storyService.CreateStoryAsync(createStoryDto);
+        return Ok(new StoryResponseDto
         {
-            return NotFound();
-        }
-        return Ok(story);
+            Id = story.Id,
+            ImagePath = story.ImagePath,
+            DateCreated = story.DateCreated,
+            IsDeleted = story.IsDeleted
+        });
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<StoryResponseDto>>> GetAllStories(int userId)
+    public async Task<ActionResult<List<StoryResponseDto>>> GetStories()
     {
-        var stories = await _storyService.GetAllStoriesAsync(userId);
+        var stories = await _storyService.GetStoriesAsync();
         return Ok(stories);
     }
 
-    [HttpDelete("{storyId}")]
-    public async Task<ActionResult> RemoveStory(int storyId)
+    [HttpDelete("delete-expired")]
+    public async Task<ActionResult> DeleteExpiredStories()
     {
-        await _storyService.RemoveStoryAsync(storyId);
+        await _storyService.DeleteExpiredStoriesAsync();
         return NoContent();
     }
 }

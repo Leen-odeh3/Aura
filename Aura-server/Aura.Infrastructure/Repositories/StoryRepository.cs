@@ -13,19 +13,7 @@ public class StoryRepository : IStoryRepository
         _context = context;
     }
 
-    public async Task<List<Story>> GetAllStoriesAsync(int userId)
-    {
-        return await _context.Stories
-            .Where(s => s.UserId == userId && !s.IsDeleted)
-            .ToListAsync();
-    }
-
-    public async Task<Story> GetStoryByIdAsync(int storyId)
-    {
-        return await _context.Stories
-            .FirstOrDefaultAsync(s => s.Id == storyId && !s.IsDeleted);
-    }
-
+    // Create a new story
     public async Task<Story> CreateStoryAsync(Story story)
     {
         _context.Stories.Add(story);
@@ -33,26 +21,25 @@ public class StoryRepository : IStoryRepository
         return story;
     }
 
-    public async Task RemoveStoryAsync(int storyId)
+    public async Task<List<Story>> GetStoriesAsync()
     {
-        var story = await GetStoryByIdAsync(storyId);
-        if (story != null)
-        {
-            story.IsDeleted = true;
-            await _context.SaveChangesAsync();
-        }
+        return await _context.Stories
+            .Include(s => s.Image) 
+            .Where(s => !s.IsDeleted) 
+            .ToListAsync();
     }
 
-    public async Task RemoveExpiredStoriesAsync()
+    public async Task DeleteExpiredStoriesAsync(DateTime expirationTime)
     {
         var expiredStories = await _context.Stories
-            .Where(s => !s.IsDeleted && s.DateCreated.AddHours(24) <= DateTime.UtcNow)
+            .Where(s => s.DateCreated < expirationTime && !s.IsDeleted)
             .ToListAsync();
 
         foreach (var story in expiredStories)
         {
             story.IsDeleted = true;
         }
+
         await _context.SaveChangesAsync();
     }
 }
