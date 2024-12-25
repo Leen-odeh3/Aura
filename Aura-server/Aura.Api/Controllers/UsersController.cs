@@ -1,7 +1,6 @@
 ﻿using Aura.Application.Abstracts.UserServices;
 using Aura.Domain.DTOs.User;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aura.Api.Controllers

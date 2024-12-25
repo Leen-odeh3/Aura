@@ -23,7 +23,6 @@ public static class ApplicationDependancyModules
         services.AddScoped<ILikeService,LikeService>();
         services.AddScoped<IFavoriteService, FavoriteService>();
         services.AddScoped<IFollowService, FollowService>();
-        services.AddScoped<IStoryService, StoryService>();
 
 
         //FileServices

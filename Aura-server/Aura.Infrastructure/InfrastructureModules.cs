@@ -24,7 +24,6 @@ public static class InfrastructureModules
         service.AddScoped<IFavoriteRepository, FavoriteRepository>();
         service.AddScoped<ILikeRepository, LikeRepository>();
         service.AddScoped<IFollowRepository, FollowRepository>();
-        service.AddScoped<IStoryRepository, StoryRepository>();
 
 
         var connectionString = configuration.GetConnectionString("Default");
