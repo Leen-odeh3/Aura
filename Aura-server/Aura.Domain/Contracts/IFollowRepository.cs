@@ -4,8 +4,7 @@ using Aura.Domain.Entities;
 namespace Aura.Domain.Contracts;
 public interface IFollowRepository
 {
-    Task<Follow> AddFollowAsync(int followerId, int followingId);
-    Task<Follow> RemoveFollowAsync(int followerId, int followingId);
-    Task<List<UserResponseDto>> GetFollowersAsync(int userId);
-    Task<List<UserResponseDto>> GetFollowingAsync(int userId);
+    Task FollowUserAsync(int followerId, int followedId);
+    Task<bool> IsFollowingAsync(int followerId, int followedId);
+
 }

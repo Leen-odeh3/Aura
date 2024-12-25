@@ -6,6 +6,8 @@ import Home from '../Pages/Home/Home';
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import PrivateRoute from "../Pages/Dashboard/PrivateRoute";
 import Profile from "../Pages/Profile/Profile";
+import Follower from "../Pages/Follower/Follower";
+import Following from "../Pages/Following/Following";
 
 const index = () => {
   return (
@@ -18,6 +20,8 @@ const index = () => {
       <Route element={<PrivateRoute/>}>
           <Route path="/home" element={<Dashboard />} />
           <Route path="/profile" element={<Profile/>} />
+          <Route path="/followers" element={<Follower/>} />
+          <Route path="/following" element={<Following/>} />
 
         </Route>
       </Routes>

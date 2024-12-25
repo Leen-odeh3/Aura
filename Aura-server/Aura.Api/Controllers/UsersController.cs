@@ -20,6 +20,19 @@ namespace Aura.Api.Controllers
             this.userAccountService = userAccountService;
         }
 
+        [HttpGet("{userId}/followers")]
+        [Authorize]
+        public async Task<IActionResult> GetFollowers(int userId)
+        {
+            var followers = await userAccountService.GetFollowersAsync(userId);
+
+            if (followers == null || followers.Count == 0)
+            {
+                return NotFound("No followers found.");
+            }
+
+            return Ok(followers);
+        }
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetUsers(

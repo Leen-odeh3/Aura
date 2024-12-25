@@ -7,7 +7,8 @@ public class UserProfile : Profile
 {
     public UserProfile()
     {
-        CreateMap<User, UserResponseDto>();
+        CreateMap<User, UserResponseDto>()
+                    .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.Image));
 
         CreateMap<UpdateAboutRequest, User>()
       .ForMember(dest => dest.About, opt => opt.MapFrom(src => src.NewAbout));
