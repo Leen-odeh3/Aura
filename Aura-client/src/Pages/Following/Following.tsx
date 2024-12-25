@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from '../../api/axios'; 
-import { Box, Typography, Grid, Card, CardContent, Button, Avatar, CircularProgress, TextField } from '@mui/material';
+import { Box, Typography, Grid, Card, CardContent, Button, Avatar, CircularProgress, TextField, Snackbar, Alert } from '@mui/material';
 
 const Following = () => {
   const [users, setUsers] = useState<any[]>([]);
@@ -8,6 +8,9 @@ const Following = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success');
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -26,8 +29,6 @@ const Following = () => {
             Authorization: `Bearer ${token}`, 
           },
         });
-
-        console.log(response.data); 
 
         if (response.status === 200) {
           if (response.data && response.data.users.length > 0) {
@@ -62,9 +63,48 @@ const Following = () => {
     }
   };
 
+  const handleFollow = async (followedId: number) => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      setError('No authentication token found');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        '/Follow/follow', 
+        { followedId }, 
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        setSnackbarMessage('Successfully followed the user');
+        setSnackbarSeverity('success');
+      } else {
+        setSnackbarMessage('Error following the user');
+        setSnackbarSeverity('error');
+      }
+    } catch (err) {
+      setSnackbarMessage('Error following the user');
+      setSnackbarSeverity('error');
+      console.error('Error following the user:', err);
+    } finally {
+      setLoading(false);
+      setSnackbarOpen(true);  // Show Snackbar
+    }
+  };
+
   return (
     <Box sx={{ maxWidth: 1200, margin: 'auto', paddingTop: 4 }}>
-      <Typography variant="h4" gutterBottom align="center" sx={{ fontWeight: 'bold', color: '' }}>
+      <Typography variant="h4" gutterBottom align="center" sx={{ fontWeight: 'bold' }}>
         Users You Can Follow
       </Typography>
 
@@ -105,7 +145,7 @@ const Following = () => {
                     variant="contained" 
                     color="primary" 
                     sx={{ padding: '12px 24px', width: '100%', textTransform: 'none', fontSize: '1rem' }}
-                    onClick={() => alert(`Following ${user.username}`)} 
+                    onClick={() => handleFollow(user.id)} 
                   >
                     Follow
                   </Button>
@@ -117,6 +157,17 @@ const Following = () => {
           <Typography variant="h6" align="center">No users found.</Typography>
         )}
       </Grid>
+
+      {/* Snackbar for Success or Error */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
