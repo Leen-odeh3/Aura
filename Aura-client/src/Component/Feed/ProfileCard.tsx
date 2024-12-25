@@ -1,8 +1,7 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box,Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
-import Buttons from '../Buttons/Buttons';
 
 const ProfileCard = () => {
   const [userData, setUserData] = useState({
@@ -45,8 +44,8 @@ const navigate = useNavigate();
     <Box
       sx={{
         height: '60%',
-        width: '60%',
-        textAlign: 'center',
+        width: '85%',
+        textAlig: 'center',
         borderRadius: '25px',
         backgroundColor: '#f0f0f0',
         display: 'flex',
