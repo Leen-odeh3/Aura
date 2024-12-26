@@ -1,16 +1,17 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { Home, People, Mail, Notifications} from "@mui/icons-material";
+import { Home, People, Mail,} from "@mui/icons-material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useNavigate } from "react-router-dom";
 import { NavItem } from "../../Interfaces/NavItem"; 
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const navItems: NavItem[] = [
   { text: "HomePage", route: "/home", icon: <Home sx={{ fontSize: 17 }} /> },
   { text: "Following", route: "/following", icon: <PersonAddIcon sx={{ fontSize: 17 }} /> },
   { text: "Followers", route: "/followers", icon: <People sx={{ fontSize: 17 }} /> },
   { text: "Messages", route: "/messages", icon: <Mail sx={{ fontSize: 17 }} /> },
-  { text: "Notifications", route: "/notifications", icon: <Notifications sx={{ fontSize: 17}} /> },
+  { text: "Logout", route: "/", icon: <LogoutIcon sx={{ fontSize: 17}} /> },
 ];
 
 
