@@ -10,6 +10,7 @@ import Follower from "../Pages/Follower/Follower";
 import Following from "../Pages/Following/Following";
 import Favorite from "../Pages/Favorite/Favorite";
 import Chat from "../Pages/Chat/Chat";
+import Message from "../Component/Message/Message";
 
 const index = () => {
   return (
@@ -26,7 +27,7 @@ const index = () => {
           <Route path="/following" element={<Following/>} />
            <Route path="/favorite" element={<Favorite/>} />
            <Route path="/chat/:userId" element={<Chat/>} /> 
-
+           {/* <Route path="/messages" element={<Message/>} />  */}
         </Route>       
 
       </Routes>

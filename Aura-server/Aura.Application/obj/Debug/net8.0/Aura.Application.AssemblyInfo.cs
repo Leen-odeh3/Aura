@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Aura.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b5294336ac5f02d2993fb91b6d3432e2175d9792")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f24aead14cb2ae8c26a121054d3e05aa867bf1c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Aura.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Aura.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

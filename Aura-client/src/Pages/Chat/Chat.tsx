@@ -1,19 +1,18 @@
 import { useParams } from 'react-router-dom';
-import axios from '../../api/axios';  // تأكد من أن axios مضبوط بشكل صحيح في ملف axios.js
+import axios from '../../api/axios'; 
 import { Box, TextField, Button, Typography, CircularProgress, Snackbar, Alert } from '@mui/material';
 import { useState, useEffect } from 'react';
 
 const Chat = () => {
-  const { userId } = useParams();  // الحصول على معرف المستخدم من الـ URL
-  const [messages, setMessages] = useState<any[]>([]);  // لتخزين الرسائل
-  const [newMessage, setNewMessage] = useState<string>('');  // لتخزين الرسالة الجديدة
-  const [loading, setLoading] = useState<boolean>(true);  // لتحديد ما إذا كنا في حالة تحميل
-  const [error, setError] = useState<string | null>(null);  // لتخزين الأخطاء
-  const [snackbarOpen, setSnackbarOpen] = useState(false);  // للتحكم في عرض الـ Snackbar
+  const { userId } = useParams(); 
+  const [messages, setMessages] = useState<any[]>([]); 
+  const [newMessage, setNewMessage] = useState<string>('');  
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);  
+  const [snackbarOpen, setSnackbarOpen] = useState(false);  
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success');
 
-  // جلب الرسائل عند تحميل الصفحة
   useEffect(() => {
     const fetchMessages = async () => {
       const token = localStorage.getItem('token');
@@ -25,7 +24,7 @@ const Chat = () => {
       setLoading(true);
 
       try {
-        const response = await axios.get(`/api/users/${userId}/recent-chats`, {
+        const response = await axios.get(`/users/${userId}/recent-chats`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -46,9 +45,8 @@ const Chat = () => {
     fetchMessages();
   }, [userId]);
 
-  // إرسال رسالة
   const handleSendMessage = async () => {
-    if (newMessage.trim() === '') return;  // تأكد من أن الرسالة ليست فارغة
+    if (newMessage.trim() === '') return; 
 
     const token = localStorage.getItem('token');
     if (!token) {
@@ -58,9 +56,9 @@ const Chat = () => {
 
     try {
       const response = await axios.post(
-        `/api/users/${userId}/recent-chats/sendMessage`,  // المسار الصحيح هنا
+        `/users/${userId}/recent-chats/sendMessage`,  
         {
-          userId: userId,    // إرسال الـ userId في الطلب
+          userId: userId, 
           message: newMessage,
         },
         {
@@ -71,24 +69,23 @@ const Chat = () => {
       );
 
       if (response.status === 200) {
-        // إضافة الرسالة إلى الرسائل المعروضة
         setMessages((prevMessages) => [
           ...prevMessages,
           { sender: 'You', content: newMessage },
         ]);
-        setNewMessage('');  // مسح محتوى مربع النص
+        setNewMessage(''); 
         setSnackbarMessage('Message sent successfully');
         setSnackbarSeverity('success');
-        setSnackbarOpen(true);  // فتح الـ Snackbar
+        setSnackbarOpen(true);  
       } else {
         setSnackbarMessage('Error sending message');
         setSnackbarSeverity('error');
-        setSnackbarOpen(true);  // فتح الـ Snackbar
+        setSnackbarOpen(true);  
       }
     } catch (err) {
       setSnackbarMessage('Error sending message');
       setSnackbarSeverity('error');
-      setSnackbarOpen(true);  // فتح الـ Snackbar
+      setSnackbarOpen(true);  
     }
   };
 
@@ -129,7 +126,6 @@ const Chat = () => {
         </Box>
       )}
 
-      {/* Snackbar for Success or Error */}
       <Snackbar open={snackbarOpen} autoHideDuration={3000} onClose={() => setSnackbarOpen(false)}>
         <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: '100%' }}>
           {snackbarMessage}
