@@ -170,10 +170,10 @@ const UserPosts = () => {
         )
       );
 
-      setSnackbarMessage(isFavorited ? 'Post removed from favorites!' : 'Post added to favorites!');
+      setSnackbarMessage(isFavorited ? 'Post removed from saved!' : 'Post added to seved!');
       setSnackbarOpen(true);
     } catch (error) {
-      console.error('Error adding post to favorites', error);
+      console.error('Error adding post to saved', error);
     }
   };
 

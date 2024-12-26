@@ -223,16 +223,13 @@ const Profile = () => {
         <Button
       variant="contained"
       sx={{
-        backgroundColor: '#f44336',
-        '&:hover': {
-          backgroundColor: '#e53935',
-        },
+        backgroundColor: '#32a850',
         padding: '10px 20px',
         borderRadius: '25px',
       }}
       onClick={() => navigate("/favorite")}
     >
-      Favorite Posts
+      Saved Posts
     </Button>
       </Box>
 
