@@ -19,6 +19,17 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new PrivateMessageConfiguration());
         modelBuilder.ApplyConfiguration(new FollowConfiguration());
 
+        modelBuilder.Entity<Message>()
+                    .HasOne(s => s.Sender)
+                    .WithMany(g => g.SendedPrivateMessages)
+                    .HasForeignKey(s => s.SenderId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Message>()
+                .HasOne(s => s.Receiver)
+                .WithMany(g => g.ReceivedPrivateMessages)
+                .HasForeignKey(s => s.ReceiverId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         base.OnModelCreating(modelBuilder);
     }
@@ -31,6 +42,6 @@ public class AppDbContext : DbContext
     public DbSet<Favorite> Favorites { get; set; }
     public DbSet<Repost> Reposts { get; set; }
     public DbSet<Story> Stories { get; set; }
-    public DbSet<PrivateMessage> PrivateMessages { get; set; }
+    public DbSet<Message> Messages { get; set; }
     public DbSet<Image> Images { get; set; }
 }

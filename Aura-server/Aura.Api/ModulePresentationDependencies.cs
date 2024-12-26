@@ -35,7 +35,6 @@ public static class ModulePresentationDependencies
 
 
         services.AddHttpClient();
-        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
         return services;

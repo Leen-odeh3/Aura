@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from '../../api/axios';
-import { Box, Typography, Grid, Card, CardContent, Button, Avatar, CircularProgress, TextField, Snackbar, Alert } from '@mui/material';
+import { Box, Typography, Grid, Button, Avatar, CircularProgress, TextField, Snackbar, Alert } from '@mui/material';
 import Header from '../../Component/Header/Header';
+import { useNavigate } from 'react-router-dom'; 
+import MessageIcon from '@mui/icons-material/Message';
 
 const Following = () => {
   const [users, setUsers] = useState<any[]>([]);
@@ -12,6 +14,7 @@ const Following = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -103,84 +106,99 @@ const Following = () => {
     }
   };
 
+  const handleMessage = (userId: number) => {
+    navigate(`/chat/${userId}`);
+  };
+
   return (
     <>
-    <Header/>
-    <Box sx={{ maxWidth: 1200, margin: 'auto', paddingTop: 4 }}>
-      <Typography variant="h4" gutterBottom align="center" sx={{ fontWeight: 'bold' }}>
-        Users You Can Follow
-      </Typography>
+      <Header/>
+      <Box sx={{ maxWidth: 1200, margin: 'auto', paddingTop: 4 }}>
+        <Typography variant="h4" gutterBottom align="center" sx={{ fontWeight: 'bold' }}>
+          Users You Can Follow
+        </Typography>
 
-      {error && <Typography color="error" align="center" sx={{ marginBottom: 2 }}>{error}</Typography>}
-      {loading && <CircularProgress sx={{ display: 'block', margin: 'auto', marginTop: 4 }} />}
+        {error && <Typography color="error" align="center" sx={{ marginBottom: 2 }}>{error}</Typography>}
+        {loading && <CircularProgress sx={{ display: 'block', margin: 'auto', marginTop: 4 }} />}
 
-      <Box sx={{ marginBottom: 3, textAlign: 'center' }}>
-        <TextField
-          label="Search Users"
-          variant="outlined"
-          fullWidth
-          value={searchQuery}
-          onChange={handleSearchChange}
-          sx={{ maxWidth: 400, margin: '20px auto' }}
-        />
-      </Box>
+        <Box sx={{ marginBottom: 3, textAlign: 'center' }}>
+          <TextField
+            label="Search Users"
+            variant="outlined"
+            fullWidth
+            value={searchQuery}
+            onChange={handleSearchChange}
+            sx={{ maxWidth: 400, margin: '20px auto' }}
+          />
+        </Box>
 
-      <Grid container spacing={3}>
-        {filteredUsers.length > 0 ? (
-          filteredUsers.map((user) => (
-            <Grid item xs={12} sm={6} md={3} key={user.id}>
-              <Box sx={{
-                borderRadius:4, padding: 2, border:"1px solid #e3e1e1",
-                display: 'flex', flexDirection: 'column', alignItems: 'center'
-              }}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 2 }}>
-                    <Avatar
-                      src={user.image ? user.image.imagePath : '/default-avatar.jpg'}
-                      sx={{ width: 90, height: 90, boxShadow: 3, marginBottom: 1 }}
-                    />
-                    <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
-                      {user.username}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" sx={{ marginBottom: 2, textAlign: 'center' }}>
-                      {user.about || 'No bio available'}
-                    </Typography>
+        <Grid container spacing={3}>
+          {filteredUsers.length > 0 ? (
+            filteredUsers.map((user) => (
+              <Grid item xs={12} sm={6} md={3} key={user.id}>
+                <Box sx={{
+                  borderRadius: 4, padding: 2, border: "1px solid #e3e1e1",
+                  display: 'flex', flexDirection: 'column', alignItems: 'center'
+                }}>
+                  <Box sx={{ textAlign: 'center' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 2 }}>
+                      <Avatar
+                        src={user.image ? user.image.imagePath : '/default-avatar.jpg'}
+                        sx={{ width: 90, height: 90, boxShadow: 3, marginBottom: 1 }}
+                      />
+                      <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
+                        {user.username}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" sx={{ marginBottom: 2, textAlign: 'center' }}>
+                        {user.about || 'No bio available'}
+                      </Typography>
+                    </Box>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        padding: '4px 24px',
+                        width: '100%',
+                        textTransform: 'none',
+                        fontSize: '1rem',
+                        marginBottom: '10px',
+                        backgroundColor: 'var(--Primary)',
+                      }}
+                      onClick={() => handleFollow(user.id)}
+                    >
+                      Follow
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        width: '100%',
+                        textTransform: 'none',
+                        fontSize: '1rem',
+                      }}
+                      startIcon={<MessageIcon />}
+                      onClick={() => handleMessage(user.id)}
+                    >
+                      Message
+                    </Button>
                   </Box>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      padding: '4px 24px',
-                      width: '100%',
-                      textTransform: 'none',
-                      fontSize: '1rem',
-                      marginBottom: '10px',
-                      backgroundColor: 'var(--Primary)',
-                    }}
-                    onClick={() => handleFollow(user.id)}
-                  >
-                    Follow
-                  </Button>
-
                 </Box>
-              </Box>
-            </Grid>
-          ))
-        ) : (
-          <Typography variant="h6" align="center">No users found.</Typography>
-        )}
-      </Grid>
+              </Grid>
+            ))
+          ) : (
+            <Typography variant="h6" align="center">No users found.</Typography>
+          )}
+        </Grid>
 
-      {/* Snackbar for Success or Error */}
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={() => setSnackbarOpen(false)}
-      >
-        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: '100%' }}>
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
-    </Box>
+        {/* Snackbar for Success or Error */}
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={() => setSnackbarOpen(false)}
+        >
+          <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity} sx={{ width: '100%' }}>
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>
+      </Box>
     </>
   );
 };

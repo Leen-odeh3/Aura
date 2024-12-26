@@ -1,5 +1,6 @@
 using Aura.Api.Middleware;
 using Aura.Application;
+using Aura.Application.Hub;
 using Aura.Infrastructure;
 
 namespace Aura.Api;
@@ -27,6 +28,8 @@ public class Program
             });
         });
 
+       builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment())
@@ -43,6 +46,8 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
+        app.MapHub<ChatHub>("/chat");
+
 
         app.Run();
     }

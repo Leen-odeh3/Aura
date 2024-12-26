@@ -28,6 +28,15 @@ public class FavoriteRepository : IFavoriteRepository
             .ToListAsync();
     }
 
+    public async Task<List<FavoriteResponseDto>> GetFavoritesByUserIdAsync(int userId)
+    {
+        return await _dbContext.Set<Favorite>()
+            .Where(f => f.UserId == userId)
+            .Include(f => f.Post) 
+            .Include(f => f.User) 
+            .ProjectTo<FavoriteResponseDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
 
     public async Task<FavoriteResponseDto> AddFavoriteAsync(int postId, int userId)
     {
@@ -41,8 +50,16 @@ public class FavoriteRepository : IFavoriteRepository
         _dbContext.Set<Favorite>().Add(favorite);
         await _dbContext.SaveChangesAsync();
 
-        return _mapper.Map<FavoriteResponseDto>(favorite);
+        var favoriteWithUser = await _dbContext.Set<Favorite>()
+            .Include(f => f.User)
+            .FirstOrDefaultAsync(f => f.Id == favorite.Id);
+
+        var favoriteResponse = _mapper.Map<FavoriteResponseDto>(favoriteWithUser);
+        favoriteResponse.Username = favoriteWithUser.User?.Username;
+
+        return favoriteResponse;
     }
+
 
     public async Task<FavoriteResponseDto> RemoveFavoriteAsync(int favoriteId)
     {

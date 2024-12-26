@@ -4,7 +4,14 @@
   --Primary:#FF6F61;
   --secondary:#D3D3D3;
 }
+::-webkit-scrollbar{
+  width:3px;
+}
 
+::-webkit-scrollbar-thumb{
+  background-color:#fd6a5c;
+  border-radius: 20px;
+}
 *{
   padding: 0%;
   margin: 0%;

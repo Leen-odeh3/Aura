@@ -220,6 +220,17 @@ const Profile = () => {
         >
           Delete
         </Button>
+        <Button
+      variant="contained"
+      sx={{
+        backgroundColor: '#32a850',
+        padding: '10px 20px',
+        borderRadius: '25px',
+      }}
+      onClick={() => navigate("/favorite")}
+    >
+      Saved Posts
+    </Button>
       </Box>
 
       <Box
