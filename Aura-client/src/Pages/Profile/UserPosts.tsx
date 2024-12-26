@@ -1,19 +1,63 @@
 import { useEffect, useState } from 'react';
 import axios from '../../api/axios';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import FavoriteIcon from '@mui/icons-material/Favorite'; 
-import { Snackbar, Alert } from '@mui/material'; 
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Snackbar, Alert } from '@mui/material';
+import Icon from './Icon';
 
 const UserPosts = () => {
   const [posts, setPosts] = useState<any[]>([]);
   const [comments, setComments] = useState<any>({});
   const [error, setError] = useState<string>();
-  const [comment, setComment] = useState<string>(''); 
+  const [comment, setComment] = useState<string>('');
   const [commentError, setCommentError] = useState<string>('');
   const token = localStorage.getItem('token');
   const userId = localStorage.getItem('userId');
-  const [loadedComments, setLoadedComments] = useState<{[key: number]: number}>({});
-  
+  const [loadedComments, setLoadedComments] = useState<{ [key: number]: number }>({});
+
+  const handleLike = async (postId: number) => {
+    try {
+      const response = await axios.post(
+        `/posts/${postId}/like`,
+        {},
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === postId ? { ...post, likes: post.likes + 1 } : post
+        )
+      );
+    } catch (error) {
+      console.error('Error liking post', error);
+    }
+  };
+
+  const handleUnlike = async (postId: number) => {
+    try {
+      const response = await axios.post(
+        `/posts/${postId}/unlike`,
+        {},
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === postId ? { ...post, likes: post.likes - 1 } : post
+        )
+      );
+    } catch (error) {
+      console.error('Error unliking post', error);
+    }
+  };
+
   // State for Snackbar
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -66,50 +110,6 @@ const UserPosts = () => {
     }
   };
 
-  const handleLike = async (postId: number) => {
-    try {
-      const response = await axios.post(
-        `/posts/${postId}/like`, 
-        {},
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post.id === postId ? { ...post, likes: post.likes + 1 } : post
-        )
-      );
-    } catch (error) {
-      console.error('Error liking post', error);
-    }
-  };
-
-  const handleUnlike = async (postId: number) => {
-    try {
-      const response = await axios.post(
-        `/posts/${postId}/unlike`,
-        {},
-        {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post.id === postId ? { ...post, likes: post.likes - 1 } : post
-        )
-      );
-    } catch (error) {
-      console.error('Error unliking post', error);
-    }
-  };
-
   const handleCommentSubmit = async (postId: number) => {
     if (!comment.trim()) {
       setCommentError('Comment cannot be empty');
@@ -142,7 +142,7 @@ const UserPosts = () => {
     const nextLoadCount = currentLoaded + 2;
     setLoadedComments((prev: any) => ({
       ...prev,
-      [postId]: nextLoadCount, 
+      [postId]: nextLoadCount,
     }));
   };
 
@@ -155,7 +155,7 @@ const UserPosts = () => {
   const handleAddToFavorites = async (postId: number, isFavorited: boolean) => {
     try {
       const response = await axios.post(
-        '/favorite', 
+        '/favorite',
         { postId },
         {
           headers: {
@@ -163,7 +163,7 @@ const UserPosts = () => {
           },
         }
       );
-      
+
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
           post.id === postId ? { ...post, isFavorited: !isFavorited } : post
@@ -261,8 +261,8 @@ const UserPosts = () => {
           margin-top: 10px;
         }
         .like-button {
-          background-color: #FF6F61;
-          color: white;
+          background-color:white;
+          color: #0566ab;
           padding: 8px;
           border: none;
           cursor: pointer;
@@ -289,8 +289,8 @@ const UserPosts = () => {
               <div key={post.id} className="post">
                 <div className="post-title">
                   <span>{post.user?.username}</span>
-                  <button 
-                    onClick={() => handleAddToFavorites(post.id, post.isFavorited)} 
+                  <button
+                    onClick={() => handleAddToFavorites(post.id, post.isFavorited)}
                     className={`favorite-button ${post.isFavorited ? 'active' : ''}`}
                   >
                     <FavoriteIcon />
@@ -298,15 +298,14 @@ const UserPosts = () => {
                 </div>
                 <p className="post-content">{post.content}</p>
                 {post.image && <img src={post.image.imagePath} alt="Post image" className="post-image" />}
-                
-                <button
-                  onClick={() => (post.liked ? handleUnlike(post.id) : handleLike(post.id))}
-                  className="like-button"
-                >
-                  <ThumbUpIcon /> {post.likes}
-                </button>
 
-                {/* Comment form */}
+                <Icon
+                  postId={post.id}
+                  liked={post.isFavorited}
+                  likes={post.likes}
+                  onLike={handleLike}
+                  onUnlike={handleUnlike}
+                />
                 <div>
                   <textarea
                     value={comment}
