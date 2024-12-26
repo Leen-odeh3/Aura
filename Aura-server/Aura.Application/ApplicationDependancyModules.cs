@@ -4,7 +4,6 @@ using Aura.Application.Abstracts.UserServices;
 using Aura.Application.Services;
 using Aura.Application.Services.FileServices;
 using Aura.Application.Services.UserServices;
-using Aura.Domain.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +23,10 @@ public static class ApplicationDependancyModules
         services.AddScoped<IFavoriteService, FavoriteService>();
         services.AddScoped<IFollowService, FollowService>();
         services.AddScoped<IStoryService,StoryService>();
+
+        // MessagesServices
+        services.AddScoped<IMessageService, MessageService>();
+
 
         //FileServices
 

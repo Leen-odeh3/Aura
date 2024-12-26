@@ -163,3 +163,9 @@ C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\refint\Aura.Api.d
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\Aura.Api.pdb
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\Aura.Api.genruntimeconfig.cache
 C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\obj\Debug\net8.0\ref\Aura.Api.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\bin\Debug\net8.0\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\hp\Desktop\Aura\Aura-server\Aura.Api\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll

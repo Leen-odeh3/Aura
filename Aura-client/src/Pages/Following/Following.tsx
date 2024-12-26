@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from '../../api/axios';
-import { Box, Typography, Grid, Card, CardContent, Button, Avatar, CircularProgress, TextField, Snackbar, Alert } from '@mui/material';
+import { Box, Typography, Grid, Button,CircularProgress, TextField, Snackbar, Alert } from '@mui/material';
 import Header from '../../Component/Header/Header';
 
 const Following = () => {

@@ -1,5 +1,5 @@
 ﻿namespace Aura.Domain.Entities;
-public class PrivateMessage
+public class Message
 {
     public int Id { get; set; }
     public string TextBody { get; set; }

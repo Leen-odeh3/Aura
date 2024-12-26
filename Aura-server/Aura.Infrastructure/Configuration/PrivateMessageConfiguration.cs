@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Aura.Infrastructure.Configuration;
-public class PrivateMessageConfiguration : IEntityTypeConfiguration<PrivateMessage>
+public class PrivateMessageConfiguration : IEntityTypeConfiguration<Message>
 {
-    public void Configure(EntityTypeBuilder<PrivateMessage> builder)
+    public void Configure(EntityTypeBuilder<Message> builder)
     {
               builder.HasOne(s => s.Sender)
                      .WithMany(g => g.SendedPrivateMessages)
