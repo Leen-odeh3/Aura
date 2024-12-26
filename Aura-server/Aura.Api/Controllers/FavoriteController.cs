@@ -1,7 +1,7 @@
 ﻿using Aura.Application.Abstracts;
+using Aura.Application.Abstracts.UserServices;
 using Aura.Domain.DTOs.Favorite;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Aura.Api.Controllers;
@@ -12,24 +12,48 @@ namespace Aura.Api.Controllers;
 public class FavoriteController : ControllerBase
 {
     private readonly IFavoriteService _favoriteService;
+    private readonly IAuthenticatedUserService _authenticatedUserService;
 
-    public FavoriteController(IFavoriteService favoriteService)
+    public FavoriteController(IFavoriteService favoriteService, IAuthenticatedUserService authenticatedUserService)
     {
         _favoriteService = favoriteService;
+        _authenticatedUserService = authenticatedUserService;
     }
 
-    [HttpGet("{postId}")]
-    public async Task<IActionResult> GetFavoritesByPostId(int postId)
+    [HttpGet("userFavorites")]
+    public async Task<IActionResult> GetFavoritesByAuthenticatedUser()
     {
-        var favorites = await _favoriteService.GetFavoritesByPostIdAsync(postId);
+        var userId = _authenticatedUserService.GetAuthenticatedUserId();
+
+        if (userId <= 0)
+        {
+            return Unauthorized("User is not authenticated.");
+        }
+
+        var favorites = await _favoriteService.GetFavoritesByUserIdAsync(userId);
+
+        if (favorites == null || !favorites.Any())
+        {
+            return NotFound("No favorites found for this user.");
+        }
+
         return Ok(favorites);
     }
 
+    // POST: api/Favorite
     [HttpPost]
     public async Task<IActionResult> AddFavorite([FromBody] FavoriteRequestDto request)
     {
-        var favorite = await _favoriteService.AddFavoriteAsync(request.PostId, request.UserId);
-        return CreatedAtAction(nameof(GetFavoritesByPostId), new { postId = request.PostId }, favorite);
+        var userId = _authenticatedUserService.GetAuthenticatedUserId();
+
+        if (userId <= 0)
+        {
+            return Unauthorized("User is not authenticated.");
+        }
+
+        var favorite = await _favoriteService.AddFavoriteAsync(request.PostId, userId);
+
+        return CreatedAtAction(nameof(GetFavoritesByAuthenticatedUser), new { postId = request.PostId }, favorite);
     }
 
     [HttpDelete("{favoriteId}")]

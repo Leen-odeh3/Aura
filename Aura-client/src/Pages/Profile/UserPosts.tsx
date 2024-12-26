@@ -1,16 +1,22 @@
 import { useEffect, useState } from 'react';
 import axios from '../../api/axios';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp'; 
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import FavoriteIcon from '@mui/icons-material/Favorite'; 
+import { Snackbar, Alert } from '@mui/material'; 
 
 const UserPosts = () => {
   const [posts, setPosts] = useState<any[]>([]);
-  const [comments, setComments] = useState<any>({}); 
+  const [comments, setComments] = useState<any>({});
   const [error, setError] = useState<string>();
   const [comment, setComment] = useState<string>(''); 
   const [commentError, setCommentError] = useState<string>('');
   const token = localStorage.getItem('token');
   const userId = localStorage.getItem('userId');
   const [loadedComments, setLoadedComments] = useState<{[key: number]: number}>({});
+  
+  // State for Snackbar
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -52,7 +58,7 @@ const UserPosts = () => {
         }));
         setLoadedComments((prev: any) => ({
           ...prev,
-          [post.id]: 2, 
+          [post.id]: 2,
         }));
       } catch (error) {
         console.error(`Error fetching comments for post ${post.id}`, error);
@@ -146,6 +152,35 @@ const UserPosts = () => {
     return allComments.slice(0, loadedCount);
   };
 
+  const handleAddToFavorites = async (postId: number, isFavorited: boolean) => {
+    try {
+      const response = await axios.post(
+        '/favorite', 
+        { postId },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+      );
+      
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === postId ? { ...post, isFavorited: !isFavorited } : post
+        )
+      );
+
+      setSnackbarMessage(isFavorited ? 'Post removed from favorites!' : 'Post added to favorites!');
+      setSnackbarOpen(true);
+    } catch (error) {
+      console.error('Error adding post to favorites', error);
+    }
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
+
   return (
     <div>
       <style>{`
@@ -153,27 +188,29 @@ const UserPosts = () => {
           border: 1px solid #ddd;
           border-radius: 8px;
           margin-bottom: 20px;
-          padding: 15px ;
+          padding: 15px;
           background-color: #f9f9f9;
           display: flex;
           flex-direction: column;
           gap: 10px;
           max-width: 600px;
-          width: 100%; 
+          width: 100%;
         }
         .post-title {
           font-size: 1rem;
           margin: 0;
           color: #666;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
         .post-content {
           font-size: 1.5rem;
-          color: #666;
           color: #333;
         }
         .post-image {
           max-width: 600px;
-          width: 100%;  
+          width: 100%;
           border-radius: 8px;
           height: 400px;
         }
@@ -200,7 +237,6 @@ const UserPosts = () => {
         }
         .comment-list {
           margin-top: 15px;
-          width:"100px"
         }
         .comment {
           border: 1px solid #ddd;
@@ -217,7 +253,7 @@ const UserPosts = () => {
           color: #555;
         }
         .see-more-button {
-          color:#FF6F61;
+          color: #FF6F61;
           padding: 10px;
           border: none;
           cursor: pointer;
@@ -233,6 +269,16 @@ const UserPosts = () => {
           border-radius: 5px;
           margin-top: 10px;
         }
+        .favorite-button {
+          color: white;
+          padding: 4px;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+        .favorite-button.active {
+          color: #0566ab;
+        }
       `}</style>
 
       <div className="container">
@@ -241,10 +287,18 @@ const UserPosts = () => {
           <div>
             {posts.map((post) => (
               <div key={post.id} className="post">
-                <h3 className="post-title">{post.user?.username}</h3>
+                <div className="post-title">
+                  <span>{post.user?.username}</span>
+                  <button 
+                    onClick={() => handleAddToFavorites(post.id, post.isFavorited)} 
+                    className={`favorite-button ${post.isFavorited ? 'active' : ''}`}
+                  >
+                    <FavoriteIcon />
+                  </button>
+                </div>
                 <p className="post-content">{post.content}</p>
                 {post.image && <img src={post.image.imagePath} alt="Post image" className="post-image" />}
-
+                
                 <button
                   onClick={() => (post.liked ? handleUnlike(post.id) : handleLike(post.id))}
                   className="like-button"
@@ -290,6 +344,16 @@ const UserPosts = () => {
           <p>No posts to display.</p>
         )}
       </div>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
