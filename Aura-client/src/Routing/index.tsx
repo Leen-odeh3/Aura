@@ -9,6 +9,7 @@ import Profile from "../Pages/Profile/Profile";
 import Follower from "../Pages/Follower/Follower";
 import Following from "../Pages/Following/Following";
 import Favorite from "../Pages/Favorite/Favorite";
+import Chat from "../Pages/Chat/Chat";
 
 const index = () => {
   return (
@@ -24,6 +25,7 @@ const index = () => {
           <Route path="/followers" element={<Follower/>} />
           <Route path="/following" element={<Following/>} />
            <Route path="/favorite" element={<Favorite/>} />
+           <Route path="/chat/:userId" element={<Chat/>} /> 
 
         </Route>       
 

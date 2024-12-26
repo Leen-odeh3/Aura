@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Aura.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8585ef5359a416cb00786e750f6cc72dde42a308")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b5294336ac5f02d2993fb91b6d3432e2175d9792")]
 [assembly: System.Reflection.AssemblyProductAttribute("Aura.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Aura.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

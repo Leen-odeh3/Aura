@@ -130,6 +130,36 @@ namespace Aura.Infrastructure.Migrations
                     b.ToTable("Likes");
                 });
 
+            modelBuilder.Entity("Aura.Domain.Entities.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TextBody")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("Aura.Domain.Entities.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -167,36 +197,6 @@ namespace Aura.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("Aura.Domain.Entities.PrivateMessage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ReceiverId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TextBody")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReceiverId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("PrivateMessages");
                 });
 
             modelBuilder.Entity("Aura.Domain.Entities.Repost", b =>
@@ -359,24 +359,7 @@ namespace Aura.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Aura.Domain.Entities.Post", b =>
-                {
-                    b.HasOne("Aura.Domain.Entities.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.HasOne("Aura.Domain.Entities.User", "User")
-                        .WithMany("Posts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Image");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Aura.Domain.Entities.PrivateMessage", b =>
+            modelBuilder.Entity("Aura.Domain.Entities.Message", b =>
                 {
                     b.HasOne("Aura.Domain.Entities.User", "Receiver")
                         .WithMany("ReceivedPrivateMessages")
@@ -393,6 +376,23 @@ namespace Aura.Infrastructure.Migrations
                     b.Navigation("Receiver");
 
                     b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("Aura.Domain.Entities.Post", b =>
+                {
+                    b.HasOne("Aura.Domain.Entities.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.HasOne("Aura.Domain.Entities.User", "User")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Image");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Aura.Domain.Entities.Repost", b =>
